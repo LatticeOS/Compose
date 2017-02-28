@@ -1,0 +1,45 @@
+version: "2"
+services:
+  xorg:
+    image: dengleros/xorg
+    container_name: xorg
+    hostname: xorg
+    privileged: true
+    read_only: true
+    restart: always
+    user: root
+    environment:
+      - DISPLAY=:0
+    tmpfs:
+      - /var/log
+    volumes:
+      - latticeos-tmp:/tmp
+      # Workaround missing tmpfs
+      - /var/log
+  dbus:
+    image: dengleros/dbus
+    container_name: dbus
+    hostname: dbus
+    read_only: true
+    restart: always
+    volumes:
+      - latticeos-varlibdbus:/var/lib/dbus
+      - latticeos-varrundbus:/var/run/dbus
+      - latticeos-homeuserdbus:/home/user/.dbus
+      # xorg volume
+      - latticeos-tmp:/tmp
+  desktop:
+    image: daocloud.io/dphdjy/docker-xfce4-material:latest
+    container_name: desktop
+    hostname: desktop
+    restart: unless-stopped
+    environment:
+      - DISPLAY=:0
+    volumes_from:
+      - xorg
+volumes:
+  latticeos-tmp:
+  latticeos-varlibdbus:
+  latticeos-varrundbus:
+  latticeos-homeuserdbus:
+  latticeos-home:
