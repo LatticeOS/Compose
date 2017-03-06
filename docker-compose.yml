@@ -1,7 +1,7 @@
 version: "2"
 services:
   xorg:
-    image: dengleros/xorg
+    image: gitai/xorg
     container_name: xorg
     hostname: xorg
     privileged: true
