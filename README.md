@@ -3,6 +3,8 @@ LatticeOS compose setup
 
 A simple setup to deploy Lattice GUI environment.
 
+![](https://www.diigo.com/file/image/ssdarodzdrsqosccczcrbpoebb/docker-desktop-vscode-libreoffice.jpg)
+
 ## Requirements
 
 1. Install Docker
