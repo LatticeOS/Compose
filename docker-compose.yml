@@ -29,7 +29,7 @@ services:
       # xorg volume
       - latticeos-tmp:/tmp
   desktop:
-    image: daocloud.io/dphdjy/docker-xfce4-material:latest
+    image: gitai/xfce4-desktop
     container_name: desktop
     hostname: desktop
     restart: unless-stopped
