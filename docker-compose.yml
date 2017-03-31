@@ -1,5 +1,12 @@
 version: "2"
 services:
+  data:
+    image: alpine
+    hostname: data
+    command: sh
+    volumes:
+      - /tmp
+      - /var/log
   xorg:
     image: gitai/xorg
     container_name: xorg
@@ -13,9 +20,9 @@ services:
     tmpfs:
       - /var/log
     volumes:
-      - latticeos-tmp:/tmp
-      # Workaround missing tmpfs
-      - /var/log
+      - /home/user/workspace
+    volumes_from:
+      - data
   dbus:
     image: dengleros/dbus
     container_name: dbus
@@ -23,23 +30,18 @@ services:
     read_only: true
     restart: always
     volumes:
-      - latticeos-varlibdbus:/var/lib/dbus
-      - latticeos-varrundbus:/var/run/dbus
-      - latticeos-homeuserdbus:/home/user/.dbus
-      # xorg volume
-      - latticeos-tmp:/tmp
+      - /var/lib/dbus
+      - /var/run/dbus
+      - /home/user/.dbus
+    volumes_from:
+      - data
   desktop:
     image: gitai/xfce4-desktop
     container_name: desktop
     hostname: desktop
     restart: unless-stopped
+    user: user
     environment:
       - DISPLAY=:0
     volumes_from:
       - xorg
-volumes:
-  latticeos-tmp:
-  latticeos-varlibdbus:
-  latticeos-varrundbus:
-  latticeos-homeuserdbus:
-  latticeos-home:
