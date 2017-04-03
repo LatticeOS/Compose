@@ -41,9 +41,10 @@ services:
     container_name: desktop
     hostname: desktop
     restart: unless-stopped
-    user: root
     environment:
       - DISPLAY=:0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     volumes_from:
       - xorg
 #volumes:
