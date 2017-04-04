@@ -45,6 +45,7 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: /opt/lattice/projects
     volumes_from:
       - data
   desktop:
