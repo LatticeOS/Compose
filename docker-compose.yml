@@ -37,7 +37,7 @@ services:
       - /home/user/.dbus
     volumes_from:
       - data
-  api:
+  restful_api:
     image: gitai/restful-api
     container_name: api
     hostname: api
@@ -58,13 +58,13 @@ services:
     volumes_from:
       - xorg
   workspace:
-    image: gitai/workspace
+    image: daocloud.io/dphdjy/workspace
     container_name: workspace
     user: root
     environment:
       - DISPLAY=:0
-    link:
-      - api
+    links:
+      - restful_api:api
     volumes_from:
       - desktop
     
