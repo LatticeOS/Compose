@@ -5,4 +5,4 @@ RUN pip install docker-compose
 
 COPY . /lattice
 
-ENTRYPOINT "cd /lattice && docker-compose up"
+ENTRYPOINT "sh"
