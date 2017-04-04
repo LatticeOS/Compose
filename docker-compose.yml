@@ -2,6 +2,7 @@ version: "2"
 services:
   data:
     image: alpine
+    container_name: data
     hostname: data
     command: sh
     volumes:
@@ -36,6 +37,15 @@ services:
       - /home/user/.dbus
     volumes_from:
       - data
+  api:
+    image: gitai/restful-api
+    container_name: api
+    hostname: api
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    volumes_from:
+      - data
   desktop:
     image: gitai/xfce4-desktop
     container_name: desktop
@@ -47,6 +57,17 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     volumes_from:
       - xorg
+  workspace:
+    image: gitai/workspace
+    container_name: workspace
+    user: root
+    environment:
+      - DISPLAY=:0
+    link:
+      - api
+    volumes_from:
+      - desktop
+    
 #volumes:
 #  latticeos-tmp:
 #  latticeos-varlibdbus:
