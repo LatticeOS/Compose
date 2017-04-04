@@ -8,6 +8,7 @@ services:
     volumes:
       - /tmp
       - /opt/lattice/bin
+      - /opt/lattice/projects
       - /var/log
   xorg:
     image: gitai/xorg
@@ -58,13 +59,14 @@ services:
     volumes_from:
       - xorg
   workspace:
-    image: daocloud.io/dphdjy/workspace
+    image: gitai/workspace
     container_name: workspace
     user: root
     environment:
       - DISPLAY=:0
     links:
       - restful_api:api
+    working_dir: /opt/lattice/projects/
     volumes_from:
       - desktop
     
