@@ -10,6 +10,10 @@ A simple setup to deploy Lattice GUI environment.
 ### In docker
 
 ```
+# docker run -d -v /var/run/docker.sock:/var/run/docker.sock --name latticeos daocloud.io/dphdjy/latticeos
+```
+
+```
 # docker run -d -v /var/run/docker.sock:/var/run/docker.sock --name latticeos gitai/latticeos
 ```
 
