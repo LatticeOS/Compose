@@ -60,7 +60,7 @@ services:
     volumes_from:
       - xorg
   workspace:
-    image: gitai/workspace
+    image: gitai/workspace:dist
     container_name: workspace
     user: root
     environment:
