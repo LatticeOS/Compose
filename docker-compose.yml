@@ -63,6 +63,7 @@ services:
     image: gitai/workspace:dist
     container_name: workspace
     user: root
+    restart: always
     environment:
       - DISPLAY=:0
     links:
